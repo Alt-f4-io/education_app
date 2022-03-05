@@ -5,6 +5,7 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #fff;
 }
 
 :root {
@@ -16,8 +17,8 @@ body {
   --color-primary-700: #242c37;
   --color-primary-800: #151a21;
   --color-primary-900: #0b0e11;
-  --color-accent: #f02f39;
-  --color-accent-hover: #f84e54;
+  --color-accent: #f55a62;
+  --color-accent-hover: #fc3138;
   --color-accent-disabled: #ed7176;
 }
 
