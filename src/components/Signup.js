@@ -15,7 +15,7 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if (passwordConfirmRef.current.value !== passwordConfirmRef.current.value) {
+        if (passwordConfirmRef.current.value !== passwordRef.current.value) {
             return setError ("Passwords do not match")
         }
 
@@ -31,11 +31,10 @@ export default function Signup() {
 
     return (
     <div className='body'>
-        {error && <div className="alert-danger"><p>{error}</p></div>}
-        {error && <p>password Failed</p>}
         <div className='card'>
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
+            {error && <div className="alert-danger"><p>{error}</p></div>}
                 <div className='form-container'>
                     <div id="name" className="input-container">
                         <label>Name</label>
@@ -54,9 +53,8 @@ export default function Signup() {
                         <input className="input-field" type="password" ref={passwordConfirmRef} required />
                     </div>
                 </div>
-                
+                <button disabled={loading} className='button' type="submit">Sign up</button>
             </form>
-            <button disabled={loading} className='button' type="submit">Sign up</button>
         </div>
         Already Have an Acount? Login
     </div>
