@@ -1,16 +1,18 @@
 import React, {useRef, useState} from 'react'
 import './Signup.css'
 import { useAuth } from '../contexts/AuthContext'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
-    
     const emailRef = useRef()
-    const nameRef = useRef()
+    const firstNameRef = useRef()
+    const lastNameRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const {signup} = useAuth()
+    const { signup,  } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
  
     async function handleSubmit(e) {
         e.preventDefault()
@@ -23,6 +25,7 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            navigate("/home")
         } catch{
             setError('Failed to create an account')
         }
@@ -36,9 +39,13 @@ export default function Signup() {
             <form onSubmit={handleSubmit}>
             {error && <div className="alert-danger"><p>{error}</p></div>}
                 <div className='form-container'>
-                    <div id="name" className="input-container">
-                        <label>Name</label>
-                        <input className="input-field" type="name" ref={nameRef} required />
+                    <div id="first-name" className="input-container">
+                        <label>First Name</label>
+                        <input className="input-field" ref={firstNameRef} required />
+                    </div>
+                    <div id="last-name" className="input-container">
+                        <label>Last Name</label>
+                        <input className="input-field" ref={lastNameRef} required />
                     </div>
                     <div id="email" className="input-container">
                         <label>Email</label>
@@ -56,7 +63,9 @@ export default function Signup() {
                 <button disabled={loading} className='button' type="submit">Sign up</button>
             </form>
         </div>
-        Already Have an Acount? Login
+        <div className='link'>
+            Already Have an Acount? <Link to="/login">Login</Link>
+        </div>
     </div>
   )
 }

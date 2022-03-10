@@ -17,7 +17,11 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      navigate.push("/home")
+      function sendSubmit(){
+        navigate("/home")
+      }
+
+      sendSubmit()
     } catch {
       setError("Failed to log in")
     }
