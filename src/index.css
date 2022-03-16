@@ -5,18 +5,18 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #dee3ea;
+  color: #000;
 }
 
 :root {
-  --color-button-text: #fff;
-  --color-primary-100: #dee3ea;
-  --color-primary-200: #b2bdcd;
-  --color-primary-300: #5d7290;
-  --color-primary-600: #323d4d;
-  --color-primary-700: #242c37;
-  --color-primary-800: #151a21;
-  --color-primary-900: #0b0e11;
+  --dark-color-button-text: #fff;
+  --dark-color-primary-100: #dee3ea;
+  --dark-color-primary-200: #b2bdcd;
+  --dark-color-primary-300: #5d7290;
+  --dark-color-primary-600: #323d4d;
+  --dark-color-primary-700: #242c37;
+  --dark-color-primary-800: #151a21;
+  --dark-color-primary-900: #EEF0F5;
   --color-accent: #f55a62;
   --color-accent-hover: #fc3138;
   --color-accent-disabled: #ed7176;
