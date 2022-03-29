@@ -1,57 +1,49 @@
-import React, {useRef, } from 'react'
+import React, {useRef, useState} from 'react'
 import './Signup.css'
-import { Link } from 'react-router-dom'
-import { supabase } from '../supabaseClient'
-import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
+import { Link,  } from 'react-router-dom'
+
 
 export default function Signup() {
+    
     const emailRef = useRef()
-    const firstNameRef = useRef()
-    const lastNameRef = useRef()
+    const nameRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const [loading, setLoading] = useState(false)
+    const {signup} = useAuth()
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+    const [loading, setLoading] = useState(false)
 
-    const handleSignup = async (e) => {
+    async function handleSubmit(e) {
         e.preventDefault()
-    
-        try {
-          setLoading(true)
-          await supabase.auth.signUp(
-            {
-              email: emailRef.current.value,
-              password: passwordRef.current.value,
-            },
-            {
-              data: { 
-                first_name: firstNameRef.current.value, 
-                last_name: lastNameRef.current.value,
-              }
-            }
-          )
-          
-        } catch {
-            setError('Error')
-        } finally {
-          setLoading(false)
+
+        if (passwordConfirmRef.current.value !== passwordRef.current.value) {
+            return setError ("Passwords do not match")
         }
-      }
+
+        try {
+            setError('')
+            setLoading(true)
+            await signup(emailRef.current.value, passwordRef.current.value, nameRef.current.value)
+            setSuccess('Success. Check your inbox for futher instructions.')
+        } catch{
+            setError('Failed to create an account')
+        }
+        setLoading(false)
+    }
 
     return (
     <div className='body'>
         <div className='card'>
             <h2>Sign Up</h2>
-            <form onSubmit={handleSignup}>
+            <form onSubmit={handleSubmit}>
+            {error && <div id="hide" className="alert-danger"><p>{error}</p></div>}
+            {success && <div id="hide" className='alert-success'><p>{success}</p></div>}
                 <div className='form-container'>
-                {error && <div className="alert-danger"><p>{error}</p></div>}
-                    <div id="first-name" className="input-container">
-                        <label>First Name</label>
-                        <input className="input-field" ref={firstNameRef} required />
-                    </div>
-                    <div id="last-name" className="input-container">
-                        <label>Last Name</label>
-                        <input className="input-field" ref={lastNameRef} required />
+                    <div id="name" className="input-container">
+                        <label>Full Name</label>
+                        <input className="input-field" type="name" ref={nameRef} required />
                     </div>
                     <div id="email" className="input-container">
                         <label>Email</label>
@@ -70,7 +62,7 @@ export default function Signup() {
             </form>
         </div>
         <div className='link'>
-            Already Have an Acount? <Link to="/login">Login</Link>
+            Don't have an account? <Link to="/login">Login</Link>
         </div>
     </div>
   )

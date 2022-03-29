@@ -73,3 +73,9 @@
 .button:disabled{
     background-color: var(--color-accent-disabled);
 }
+
+.link{
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
