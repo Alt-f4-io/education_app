@@ -1,99 +1,98 @@
-import React, {useState} from 'react'
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Quiz.css'
 
-export default function Quiz() {
-    const questions = [
+export default function App() {
+	const questions = [
 		{
-			questionText: 'What is the capital of France?',
+			questionText: 'What is 25 x 3',
 			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
+				{ answerText: '67', isCorrect: false },
+				{ answerText: '83', isCorrect: false },
+				{ answerText: '75', isCorrect: true },
+				{ answerText: '29', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'Who is CEO of Tesla?',
+			questionText: 'What is the square root of 144',
 			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
+				{ answerText: '8', isCorrect: false },
+				{ answerText: '12', isCorrect: true },
+				{ answerText: '53', isCorrect: false },
+				{ answerText: '11', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'The iPhone was created by which company?',
+			questionText: 'What is 13 squared?',
 			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
+				{ answerText: '169', isCorrect: true },
+				{ answerText: '278', isCorrect: false },
+				{ answerText: '167', isCorrect: false },
+				{ answerText: '287', isCorrect: false },
 			],
 		},
 		{
-			questionText: 'How many Harry Potter books are there?',
+			questionText: 'What is 82 divided by 2',
 			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
+				{ answerText: '333', isCorrect: false },
+				{ answerText: '36', isCorrect: false },
+				{ answerText: '2432', isCorrect: false },
+				{ answerText: '41', isCorrect: true },
+			],
+		},
+		{
+			questionText: 'What is 3 x 4 x 5 x 6 ',
+			answerOptions: [
+				{ answerText: '333', isCorrect: false },
+				{ answerText: '36', isCorrect: false },
+				{ answerText: '2432', isCorrect: false },
+				{ answerText: '360', isCorrect: true },
 			],
 		},
 	];
 
-    const [currentQuestion, setCurrentQuestion] = useState(0)
-    const [showScore, setShowScore] = useState(false);
-    const [score, setScore]= useState(0)
-	const [next, setNext] = useState(false)
-    const handleAnswerOptionClick = (isCorrect) => {
-        if(isCorrect===true){
-            setScore(score + 1);
-        }
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [showScore, setShowScore] = useState(false);
+	const [score, setScore] = useState(0);
+
+	const handleAnswerOptionClick = (isCorrect) => {
+		if (isCorrect) {
+			setScore(score + 1);
+		}
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
-			setNext(true)
+			setCurrentQuestion(nextQuestion);
 		} else {
-            setShowScore(true)
+			setShowScore(true);
 		}
 	};
-	const handleNextQuestion = () => {
-		const nextQuestion = currentQuestion + 1;
-		setCurrentQuestion(nextQuestion)
-		setNext(false)
-	}
-
-  return (
-      <div className='body'>
-        <div className='app'>
-
+	return (
+		<div className='body'>
+		<div className='app'>
 			{showScore ? (
-				<div className='score-section'>You scored {score} out of {questions.length}</div>
+				<div className='score-section'>
+					<h3>You scored {score} out of {questions.length}</h3>
+					<br/>
+					<Link to='/home'><h4>Back Home</h4></Link>
+				</div>
 			) : (
 				<>
-					<div className='question'>
 					<div className='question-section'>
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[currentQuestion]}</div>
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
 						{questions[currentQuestion].answerOptions.map((answerOption) => (
-                            <button className='button' onClick={()=>handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
-                        ))}
-						
+							<button className="button" onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+						))}
 					</div>
-					</div>
-					{next ? 
-						<button onClick={handleNextQuestion}  className='button'>Next Question</button>
-					 : 
-						<></>
-					}
 				</>
 			)}
 		</div>
-        
-    </div>
-  )
+		</div>
+	);
 }
