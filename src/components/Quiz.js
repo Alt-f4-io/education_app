@@ -50,6 +50,51 @@ export default function App() {
 				{ answerText: '360', isCorrect: true },
 			],
 		},
+		{
+			questionText: 'What is 9x8 ',
+			answerOptions: [
+				{ answerText: '333', isCorrect: false },
+				{ answerText: '36', isCorrect: false },
+				{ answerText: '87', isCorrect: false },
+				{ answerText: '72', isCorrect: true },
+			],
+		},
+		{
+			questionText: 'What is 7x7 ',
+			answerOptions: [
+				{ answerText: '67', isCorrect: false },
+				{ answerText: '36', isCorrect: false },
+				{ answerText: '49', isCorrect: true },
+				{ answerText: '72', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'What is 7x2 ',
+			answerOptions: [
+				{ answerText: '14', isCorrect: true },
+				{ answerText: '36', isCorrect: false },
+				{ answerText: '49', isCorrect: false },
+				{ answerText: '72', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'What is 89+73 ',
+			answerOptions: [
+				{ answerText: '162', isCorrect: true },
+				{ answerText: '124', isCorrect: false },
+				{ answerText: '156', isCorrect: false },
+				{ answerText: '167', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'What is 89-22 ',
+			answerOptions: [
+				{ answerText: '67', isCorrect: true },
+				{ answerText: '34', isCorrect: false },
+				{ answerText: '65', isCorrect: false },
+				{ answerText: '36', isCorrect: false },
+			],
+		},
 	];
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
